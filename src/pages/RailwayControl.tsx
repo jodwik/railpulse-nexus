@@ -3,8 +3,15 @@ import { Header } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
 import { RailwayMap } from '../components/RailwayMap';
 import { ControlPanel } from '../components/ControlPanel';
+import { NotificationModal } from '../components/NotificationModal';
+import { ControllerModal } from '../components/ControllerModal';
 import { trains as initialTrains, stations, conflicts, alerts } from '../data/sampleData';
 import { Train, Conflict } from '../types/railway';
+import Dashboard from './Dashboard';
+import Analytics from './Analytics';
+import Simulations from './Simulations';
+import Reports from './Reports';
+import Settings from './Settings';
 
 export default function RailwayControl() {
   const [trains, setTrains] = useState<Train[]>(initialTrains);
@@ -12,6 +19,8 @@ export default function RailwayControl() {
   const [selectedTrain, setSelectedTrain] = useState<Train | null>(null);
   const [systemStatus, setSystemStatus] = useState<'online' | 'offline' | 'degraded'>('online');
   const [unreadNotifications, setUnreadNotifications] = useState(alerts.filter(a => !a.isRead).length);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [showController, setShowController] = useState(false);
 
   // Simulate real-time updates
   useEffect(() => {
@@ -42,34 +51,20 @@ export default function RailwayControl() {
     // In a real application, this would make an API call
   };
 
-  if (activeSection !== 'operations') {
-    return (
-      <div className="h-screen flex flex-col bg-background">
-        <Header systemStatus={systemStatus} unreadNotifications={unreadNotifications} />
-        <div className="flex flex-1">
-          <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
-          <div className="flex-1 p-6 flex items-center justify-center">
-            <div className="text-center">
-              <h2 className="text-2xl font-bold mb-2">
-                {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
-              </h2>
-              <p className="text-muted-foreground">This section is under development.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const handleMarkAsRead = (id: string) => {
+    // Mark notification as read
+    setUnreadNotifications(prev => Math.max(0, prev - 1));
+  };
 
-  return (
-    <div className="h-screen flex flex-col bg-background">
-      <Header systemStatus={systemStatus} unreadNotifications={unreadNotifications} />
-      
-      <div className="flex flex-1">
-        <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
-        
-        <div className="flex-1 p-4 flex space-x-4">
-          {/* Main Map Area (70%) */}
+  const handleMarkAllAsRead = () => {
+    setUnreadNotifications(0);
+  };
+
+  const renderActiveSection = () => {
+    switch (activeSection) {
+      case 'dashboard': return <Dashboard />;
+      case 'operations': return (
+        <div className="p-4 flex space-x-4">
           <div className="flex-1 min-w-0">
             <RailwayMap 
               trains={trains}
@@ -77,8 +72,6 @@ export default function RailwayControl() {
               onTrainClick={handleTrainClick}
             />
           </div>
-          
-          {/* Control Panel (30%) */}
           <div className="w-96 flex-shrink-0">
             <ControlPanel 
               trains={trains}
@@ -88,7 +81,50 @@ export default function RailwayControl() {
             />
           </div>
         </div>
+      );
+      case 'analytics': return <Analytics />;
+      case 'simulations': return <Simulations />;
+      case 'reports': return <Reports />;
+      case 'settings': return <Settings />;
+      default: return (
+        <div className="flex-1 p-6 flex items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-2">
+              {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
+            </h2>
+            <p className="text-muted-foreground">This section is under development.</p>
+          </div>
+        </div>
+      );
+    }
+  };
+
+  return (
+    <div className="h-screen flex flex-col bg-background">
+      <Header 
+        systemStatus={systemStatus} 
+        unreadNotifications={unreadNotifications}
+        onNotificationClick={() => setShowNotifications(true)}
+        onProfileClick={() => setShowController(true)}
+      />
+      
+      <div className="flex flex-1">
+        <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
+        {renderActiveSection()}
       </div>
+
+      <NotificationModal
+        open={showNotifications}
+        onClose={() => setShowNotifications(false)}
+        notifications={alerts}
+        onMarkAsRead={handleMarkAsRead}
+        onMarkAllAsRead={handleMarkAllAsRead}
+      />
+
+      <ControllerModal
+        open={showController}
+        onClose={() => setShowController(false)}
+      />
     </div>
   );
 }
