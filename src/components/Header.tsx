@@ -12,9 +12,11 @@ import indianRailwaysLogo from '@/assets/indian-railways-logo.png';
 interface HeaderProps {
   systemStatus: 'online' | 'offline' | 'degraded';
   unreadNotifications: number;
+  onNotificationClick: () => void;
+  onProfileClick: () => void;
 }
 
-export function Header({ systemStatus, unreadNotifications }: HeaderProps) {
+export function Header({ systemStatus, unreadNotifications, onNotificationClick, onProfileClick }: HeaderProps) {
   const currentTime = new Date().toLocaleString('en-IN', {
     weekday: 'long',
     year: 'numeric',
@@ -69,7 +71,12 @@ export function Header({ systemStatus, unreadNotifications }: HeaderProps) {
         </div>
 
         {/* Notifications */}
-        <Button variant="ghost" size="sm" className="relative text-primary-foreground hover:bg-primary-hover">
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          className="relative text-primary-foreground hover:bg-primary-hover"
+          onClick={onNotificationClick}
+        >
           <Bell className="h-5 w-5" />
           {unreadNotifications > 0 && (
             <Badge 
@@ -91,7 +98,7 @@ export function Header({ systemStatus, unreadNotifications }: HeaderProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>Profile Settings</DropdownMenuItem>
+            <DropdownMenuItem onClick={onProfileClick}>Profile Settings</DropdownMenuItem>
             <DropdownMenuItem>Shift Handover</DropdownMenuItem>
             <DropdownMenuItem>System Logs</DropdownMenuItem>
             <DropdownMenuItem>Sign Out</DropdownMenuItem>

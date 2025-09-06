@@ -11,77 +11,77 @@ export const stations: Station[] = [
 
 export const trains: Train[] = [
   {
-    id: 'T001', number: '12001', name: 'Shatabdi Express', type: 'express',
+    id: 'T001', number: '12001', name: 'Shatabdi Express', type: 'express', priority: 1,
     currentSpeed: 85, maxSpeed: 130, currentStation: 'DEL', nextStation: 'GZB',
     delay: 5, position: { x: 220, y: 145 }, direction: 'east', status: 'running'
   },
   {
-    id: 'T002', number: '12002', name: 'Jan Shatabdi', type: 'express',
+    id: 'T002', number: '12002', name: 'Jan Shatabdi', type: 'express', priority: 2,
     currentSpeed: 75, maxSpeed: 120, currentStation: 'GZB', nextStation: 'AGR',
     delay: 0, position: { x: 340, y: 130 }, direction: 'south', status: 'running'
   },
   {
-    id: 'T003', number: '19019', name: 'Dehradun Express', type: 'express',
+    id: 'T003', number: '19019', name: 'Dehradun Express', type: 'express', priority: 2,
     currentSpeed: 0, maxSpeed: 110, currentStation: 'DEL', nextStation: 'GZB',
     delay: 15, position: { x: 200, y: 150 }, direction: 'north', status: 'delayed'
   },
   {
-    id: 'T004', number: '54321', name: 'Local Passenger', type: 'local',
+    id: 'T004', number: '54321', name: 'Local Passenger', type: 'local', priority: 4,
     currentSpeed: 45, maxSpeed: 80, currentStation: 'AGR', nextStation: 'GWL',
     delay: 2, position: { x: 295, y: 285 }, direction: 'east', status: 'running'
   },
   {
-    id: 'T005', number: '56789', name: 'Freight Special', type: 'freight',
+    id: 'T005', number: '56789', name: 'Freight Special', type: 'freight', priority: 5,
     currentSpeed: 35, maxSpeed: 60, currentStation: 'BPL', nextStation: 'GWL',
     delay: 8, position: { x: 195, y: 445 }, direction: 'north', status: 'running'
   },
   {
-    id: 'T006', number: '12903', name: 'Golden Temple Mail', type: 'express',
+    id: 'T006', number: '12903', name: 'Golden Temple Mail', type: 'express', priority: 1,
     currentSpeed: 95, maxSpeed: 130, currentStation: 'JPR', nextStation: 'DEL',
     delay: 0, position: { x: 135, y: 315 }, direction: 'north', status: 'running'
   },
   {
-    id: 'T007', number: '12615', name: 'Grand Trunk Express', type: 'express',
+    id: 'T007', number: '12615', name: 'Grand Trunk Express', type: 'express', priority: 2,
     currentSpeed: 80, maxSpeed: 120, currentStation: 'GWL', nextStation: 'BPL',
     delay: 12, position: { x: 315, y: 375 }, direction: 'south', status: 'running'
   },
   {
-    id: 'T008', number: '14717', name: 'BKN-JP Express', type: 'express',
+    id: 'T008', number: '14717', name: 'BKN-JP Express', type: 'express', priority: 3,
     currentSpeed: 70, maxSpeed: 110, currentStation: 'JPR', nextStation: 'AGR',
     delay: 3, position: { x: 125, y: 325 }, direction: 'east', status: 'running'
   },
   {
-    id: 'T009', number: '19665', name: 'Kurukshetra Express', type: 'express',
+    id: 'T009', number: '19665', name: 'Kurukshetra Express', type: 'express', priority: 2,
     currentSpeed: 0, maxSpeed: 120, currentStation: 'GZB', nextStation: 'DEL',
     delay: 25, position: { x: 350, y: 120 }, direction: 'west', status: 'stopped'
   },
   {
-    id: 'T010', number: '52456', name: 'Local Goods', type: 'freight',
+    id: 'T010', number: '52456', name: 'Local Goods', type: 'freight', priority: 5,
     currentSpeed: 25, maxSpeed: 50, currentStation: 'AGR', nextStation: 'DEL',
     delay: 5, position: { x: 275, y: 275 }, direction: 'north', status: 'running'
   },
   {
-    id: 'T011', number: '12049', name: 'Dadar Express', type: 'express',
+    id: 'T011', number: '12049', name: 'Dadar Express', type: 'express', priority: 2,
     currentSpeed: 90, maxSpeed: 130, currentStation: 'BPL', nextStation: 'AGR',
     delay: 0, position: { x: 185, y: 455 }, direction: 'north', status: 'running'
   },
   {
-    id: 'T012', number: '54123', name: 'Passenger Local', type: 'local',
+    id: 'T012', number: '54123', name: 'Passenger Local', type: 'local', priority: 4,
     currentSpeed: 40, maxSpeed: 75, currentStation: 'DEL', nextStation: 'JPR',
     delay: 7, position: { x: 205, y: 155 }, direction: 'south', status: 'running'
   },
   {
-    id: 'T013', number: '19711', name: 'JP-BPL Express', type: 'express',
+    id: 'T013', number: '19711', name: 'JP-BPL Express', type: 'express', priority: 3,
     currentSpeed: 85, maxSpeed: 120, currentStation: 'JPR', nextStation: 'BPL',
     delay: 0, position: { x: 130, y: 330 }, direction: 'south', status: 'running'
   },
   {
-    id: 'T014', number: '58901', name: 'Goods Special', type: 'freight',
+    id: 'T014', number: '58901', name: 'Goods Special', type: 'freight', priority: 5,
     currentSpeed: 30, maxSpeed: 55, currentStation: 'GWL', nextStation: 'AGR',
     delay: 10, position: { x: 310, y: 385 }, direction: 'west', status: 'running'
   },
   {
-    id: 'T015', number: '12919', name: 'Malwa Express', type: 'express',
+    id: 'T015', number: '12919', name: 'Malwa Express', type: 'express', priority: 3,
     currentSpeed: 0, maxSpeed: 130, currentStation: 'AGR', nextStation: 'JPR',
     delay: 18, position: { x: 280, y: 280 }, direction: 'west', status: 'delayed'
   }

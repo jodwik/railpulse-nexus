@@ -40,6 +40,28 @@ export function ControlPanel({ trains, conflicts, alerts, onDecision }: ControlP
     });
   };
 
+  const getPriorityColor = (priority: number) => {
+    const colors = {
+      1: 'bg-gradient-to-r from-yellow-500 to-orange-500',
+      2: 'bg-destructive',
+      3: 'bg-warning',
+      4: 'bg-muted',
+      5: 'bg-muted-foreground'
+    };
+    return colors[priority as keyof typeof colors];
+  };
+
+  const getPriorityLabel = (priority: number) => {
+    const labels = {
+      1: 'VIP',
+      2: 'High', 
+      3: 'Medium',
+      4: 'Low',
+      5: 'Lowest'
+    };
+    return labels[priority as keyof typeof labels];
+  };
+
   return (
     <div className="h-full flex flex-col">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="h-full flex flex-col">
@@ -60,6 +82,7 @@ export function ControlPanel({ trains, conflicts, alerts, onDecision }: ControlP
                       <Badge variant={train.type === 'express' ? 'default' : train.type === 'local' ? 'secondary' : 'outline'}>
                         {train.type.toUpperCase()}
                       </Badge>
+                      <div className={`w-3 h-3 rounded-full ${getPriorityColor(train.priority)}`} title={`Priority ${train.priority} - ${getPriorityLabel(train.priority)}`}></div>
                       <span className="font-semibold">{train.number}</span>
                     </div>
                     <Badge variant={getDelayColor(train.delay)}>
@@ -73,7 +96,7 @@ export function ControlPanel({ trains, conflicts, alerts, onDecision }: ControlP
                     <div>Current: {train.currentStation}</div>
                     <div>Next: {train.nextStation}</div>
                     <div>Speed: {train.currentSpeed} km/h</div>
-                    <div>Status: {train.status}</div>
+                    <div>Priority: {getPriorityLabel(train.priority)}</div>
                   </div>
                 </Card>
               ))}

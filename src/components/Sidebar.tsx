@@ -4,7 +4,9 @@ import {
   BarChart3, 
   Play, 
   FileText, 
-  Settings 
+  Settings,
+  Star,
+  Route
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -17,6 +19,8 @@ const navigationItems = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'operations', label: 'Live Operations', icon: Radio },
   { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+  { id: 'priority', label: 'Priority Management', icon: Star },
+  { id: 'traffic', label: 'Traffic Management', icon: Route },
   { id: 'simulations', label: 'Simulations', icon: Play },
   { id: 'reports', label: 'Reports', icon: FileText },
   { id: 'settings', label: 'Settings', icon: Settings },

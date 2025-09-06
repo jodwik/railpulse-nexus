@@ -3,6 +3,7 @@ export interface Train {
   number: string;
   name: string;
   type: 'express' | 'local' | 'freight';
+  priority: 1 | 2 | 3 | 4 | 5; // 1 = Highest (VIP), 5 = Lowest
   currentSpeed: number;
   maxSpeed: number;
   currentStation: string;
@@ -11,6 +12,17 @@ export interface Train {
   position: { x: number; y: number };
   direction: 'north' | 'south' | 'east' | 'west';
   status: 'running' | 'stopped' | 'delayed';
+}
+
+export interface TrafficSuggestion {
+  id: string;
+  type: 'delay' | 'reroute' | 'speed_adjust';
+  affectedTrain: string;
+  beneficiary: string;
+  reason: string;
+  estimatedDelay: number;
+  priority: 'high' | 'medium' | 'low';
+  impact: 'minimal' | 'moderate' | 'significant';
 }
 
 export interface Station {

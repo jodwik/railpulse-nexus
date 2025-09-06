@@ -12,6 +12,8 @@ import Analytics from './Analytics';
 import Simulations from './Simulations';
 import Reports from './Reports';
 import Settings from './Settings';
+import PriorityManagement from './PriorityManagement';
+import TrafficManagement from './TrafficManagement';
 
 export default function RailwayControl() {
   const [trains, setTrains] = useState<Train[]>(initialTrains);
@@ -83,6 +85,8 @@ export default function RailwayControl() {
         </div>
       );
       case 'analytics': return <Analytics />;
+      case 'priority': return <PriorityManagement />;
+      case 'traffic': return <TrafficManagement />;
       case 'simulations': return <Simulations />;
       case 'reports': return <Reports />;
       case 'settings': return <Settings />;

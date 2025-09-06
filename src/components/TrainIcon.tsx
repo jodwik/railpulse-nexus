@@ -27,6 +27,17 @@ export function TrainIcon({ train, x, y, isAnimated = false }: TrainIconProps) {
     }
   };
 
+  const getPriorityColor = () => {
+    switch (train.priority) {
+      case 1: return 'hsl(45, 100%, 50%)'; // Gold
+      case 2: return 'hsl(var(--destructive))'; // Red
+      case 3: return 'hsl(var(--warning))'; // Orange
+      case 4: return 'hsl(var(--muted))'; // Gray
+      case 5: return 'hsl(var(--muted-foreground))'; // Darker gray
+      default: return 'hsl(var(--muted-foreground))';
+    }
+  };
+
   return (
     <g className={isAnimated ? 'animate-train-move' : ''}>
       {/* Train Body */}
@@ -57,6 +68,25 @@ export function TrainIcon({ train, x, y, isAnimated = false }: TrainIconProps) {
         fill={getStatusColor()}
         className="opacity-80"
       />
+      
+      {/* Priority Indicator */}
+      <circle 
+        cx={x - 12} 
+        cy={y + 8} 
+        r="3" 
+        fill={getPriorityColor()}
+        stroke="hsl(var(--card))" 
+        strokeWidth="1"
+        className="opacity-90"
+      />
+      <text 
+        x={x - 12} 
+        y={y + 10}
+        textAnchor="middle" 
+        className="fill-primary-foreground text-xs font-bold pointer-events-none"
+      >
+        {train.priority}
+      </text>
       
       {/* Speed Indicator */}
       {train.currentSpeed > 0 && (
